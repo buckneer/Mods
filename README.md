@@ -33,6 +33,8 @@ You can always cancel script by running: **Ctrl+C**
 input: 3 equations
 input: 3(mod5), 1(mod7), 6(mod8)
 ```
+
+
 ![example](https://user-images.githubusercontent.com/42391164/122809328-40f7a700-d2ce-11eb-811a-d76dd3dd1673.png)
 
 
@@ -49,3 +51,8 @@ output: (3,2,1)
 ```
 
 ![example_mod](https://user-images.githubusercontent.com/42391164/122809155-05f57380-d2ce-11eb-85ee-ebb8a09771e1.png)
+
+
+## LICENSE
+[GNU General Public License v3.0](LICENSE)
+
