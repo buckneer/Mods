@@ -5,7 +5,7 @@ number = input("Please enter your number: \n")
 
 # digits = [int(i) for i in str(number)]
 
-mod_type = input("Insert mod, separated by comma: \n")
+mod_type = input("Enter mod, separated by comma: \n")
 
 mod = mod_type.split(",")
 
