@@ -1,4 +1,6 @@
 from prettytable import PrettyTable
+from PyInquirer import prompt
+
 
 results = PrettyTable()
 
@@ -6,7 +8,18 @@ results.field_names = ['mod', 'res', '(mod*mod)/(N/mod)', 'Xi', 'Results']
 
 
 
-n = input("Number of equations")
+questions = [
+    {'type' : 'input', 'name' : 'res', 'message': 'Rest'}, 
+    {'type' : 'input', 'name' : 'mod', 'message': 'Mod'}
+]
+
+e_question = [
+    {'type' : 'input', 'name': 'n', 'message': 'Number of equations'}
+]
+
+num = prompt(e_question)
+
+n = num['n']
 
 # Arrays
 equations = []  # Equations from user
@@ -20,28 +33,32 @@ final_result = 0
 
 for i in range(int(n)):
 
-    res = input("Rest")
-    mod = input("Mod")
+    # res = input("Rest")
+    # mod = input("Mod")
 
-    equation = {"mod": mod, "res": res}
+
+    answers = prompt(questions)
+
+    equation = {"mod": answers['mod'], "res": answers['res']}
    
     equations.append(equation)
 
      
 # * Find n
-for j in equations:
-    mods.append(j['mod'])
-    N = N * int(j['mod'])
-
-
-
-# * Find divided mods
-for i in mods:
-    divided_mods.append(N/int(i))
-
-
-# * Find xi
 for i in range(int(n)):
+    mods.append(equations[i]['mod'])
+    N = N * int(equations[i]['mod'])
+
+
+
+
+
+for i in range(int(n)):
+
+    #* Find divided mods
+    divided_mods.append(N/int(mods[i]))
+
+    #* Find xi
     mod = equations[i]['mod']
     divided_mod = divided_mods[i]
     modded = int(divided_mod) % int(mod)
@@ -52,11 +69,10 @@ for i in range(int(n)):
         term = (x * int(modded)) % int(mod)
         if term == 1:
             xi.append(x)
-            
 
-# * Find row result
 
-for i in range(int(n)):
+
+    #* Find row result
     res = equations[i]['res']
     n_results = divided_mods[i]
     x = xi[i]
@@ -64,13 +80,10 @@ for i in range(int(n)):
     row_results.append(int(res)*int(n_results)*int(x))
 
 
-# * Find final result
-for i in range(int(n)):
+    #* Find final result
     final_result = final_result + row_results[i]
 
-
- # Add data to table
-for i in range(int(n)):
+    #* Add data to table
     results.add_row([equations[i]['mod'], equations[i]['res'], N/int(equations[i]['mod']), xi[i], row_results[i]])
 
     
